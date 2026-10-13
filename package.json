@@ -1,0 +1,63 @@
+{
+  "name": "dsh-capability-composer",
+  "version": "1.0.0",
+  "description": "DSH plugin: shrink what the model sees, not what runs. Composes plugins and skills into named sets resolved per session / workspace / global. Only the core tools plus the meta-tools (search_plugins / load_plugin / invoke_tool) stay resident; everything else is reached on demand. Plugins and skills keep running — only the catalog shrinks.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "seed",
+    "cordis.patch.yml",
+    "install.mjs",
+    "install.ps1",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.2"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "夏目",
+    "url": "https://github.com/xiamubumu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiamubumu/dsh-capability-composer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiamubumu/dsh-capability-composer/issues"
+  },
+  "homepage": "https://github.com/xiamubumu/dsh-capability-composer#readme",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "capability",
+    "tool-registry",
+    "mcp",
+    "composer",
+    "lazy-loading"
+  ],
+  "engines": {
+    "dsh": ">=0.1.5-rc.2 <0.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
