@@ -151,15 +151,10 @@ const genDir = join(LIVE, generationId)
 const pkgDir = join(genDir, 'node_modules', PLUGIN)
 
 mkdirSync(join(pkgDir, 'lib'), { recursive: true })
-mkdirSync(join(pkgDir, 'seed'), { recursive: true })
 copyFileSync(join(HERE, 'package.json'), join(pkgDir, 'package.json'))
 copyFileSync(join(HERE, 'cordis.patch.yml'), join(pkgDir, 'cordis.patch.yml'))
 for (const rel of ['index.js', 'client.js']) {
   copyFileSync(join(HERE, 'lib', rel), join(pkgDir, 'lib', rel))
-}
-for (const name of readdirSync(join(HERE, 'seed'))) {
-  if (!statSync(join(HERE, 'seed', name)).isFile()) continue
-  copyFileSync(join(HERE, 'seed', name), join(pkgDir, 'seed', name))
 }
 
 /* 注册表读这个文件来认领这一代；pluginName / version 的格式校验不过会让

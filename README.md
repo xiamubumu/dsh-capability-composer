@@ -224,13 +224,14 @@ Two other runtime files (both are caches; delete them and they are rebuilt autom
 | `capability-composer/entry-id-map.json` | cache from package name → entry id |
 | `.composer-resident-tools` | the auto section of the resident tool list |
 
-### Where the first-install defaults come from
+### First install starts empty
 
-`seed/compositions.seed.json` (shipped with the package).
+A fresh machine gets `defaultState()` — four empty slots, no compositions, no pins. **No seed and no
+"starter pack" is shipped**: every composition in such a file would be somebody else's, and a new
+user opening the composer must not find arrangements they never created.
 
-**Used only once, when the state file does not exist**; after that it is your own state.
-
-The seed has a **double safeguard**: any pin key containing `/` or `\` is deleted — no machine-specific paths are allowed in the seed, so that switching machines never carries someone else's paths along.
+**Your existing `compositions.json` is never overwritten and never cleared** — an empty state is
+written only when the file is absent or unreadable.
 
 ### Environment variables
 
@@ -469,8 +470,6 @@ dsh-capability-composer/
 ├── lib/
 │   ├── index.js            宿主半边：状态、HTTP 接口、目录生成、段裁剪
 │   └── client.js           客户端半边：设置里那两个页签
-├── seed/
-│   └── compositions.seed.json   首次安装的默认组合
 ├── install.mjs             安装脚本（不走 Junction）
 ├── install.ps1             Windows 用
 ├── screenshots/

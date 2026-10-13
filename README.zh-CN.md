@@ -224,13 +224,12 @@ load_plugin({ ids: ["mcp:vnpy"] })
 | `capability-composer/entry-id-map.json` | 包名 → 条目 id 的缓存 |
 | `.composer-resident-tools` | 常驻工具清单的自动区 |
 
-### 首次安装的默认值从哪来
+### 首次安装是空的
 
-`seed/compositions.seed.json`（随包发布）。
+新装的机器拿到的是 `defaultState()` —— 四个空档位，没有组合、没有 pin。**不随包发任何 seed，
+也没有"新手包"**：那种文件里的每个组合都是别人的，新用户打开组合器不该看到自己从没建过的组合。
 
-**只在状态文件不存在时用一次**，之后就是你自己的状态。
-
-seed 里有**双保险**：任何含 `/` 或 `\` 的 pin key 都会被删掉 —— seed 里不允许出现与机器相关的路径，保证换机器时不会带着别人的路径过去。
+**用户已有的 `compositions.json` 绝不覆盖、绝不清空** —— 只有在文件不存在或读不出来时才会写一份空状态。
 
 ### 环境变量
 
@@ -469,8 +468,6 @@ dsh-capability-composer/
 ├── lib/
 │   ├── index.js            宿主半边：状态、HTTP 接口、目录生成、段裁剪
 │   └── client.js           客户端半边：设置里那两个页签
-├── seed/
-│   └── compositions.seed.json   首次安装的默认组合
 ├── install.mjs             安装脚本（不走 Junction）
 ├── install.ps1             Windows 用
 ├── screenshots/
