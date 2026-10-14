@@ -341,15 +341,28 @@ The `prunePluginSections()` capability lives in this plugin because **compositio
 
 ## Installation
 
-### From the DSH plugin marketplace
-
-Search for `capability composer` in the marketplace and click install.
-
-### From GitHub
+### From GitHub (recommended; measured on a fresh `DSH_HOME`)
 
 ```bash
 dsh plugin --profile web add github:xiamubumu/dsh-capability-composer
 ```
+
+### From a local tarball (air-gapped machines)
+
+Download `dsh-capability-composer-1.0.0.tgz` from [Releases](https://github.com/xiamubumu/dsh-capability-composer/releases), then:
+
+```bash
+dsh plugin --profile web add /path/to/dsh-capability-composer-1.0.0.tgz
+```
+
+### From the DSH plugin marketplace / npm (not yet possible)
+
+The marketplace submission (an `awesome-dsh-plugin` PR) has not been filed and nothing is published on npm yet ⇒ **neither route works today**.
+
+> ⚠️ **Known issue: do not feed the release asset's tarball URL to `dsh plugin add`.**
+> `dsh plugin --profile web add https://github.com/.../releases/download/v1.0.0/....tgz` fails on the pnpm DSH bundles (10.34.5) with
+> `ERR_PNPM_MISSING_TARBALL_INTEGRITY` ([pnpm#14351](https://github.com/pnpm/pnpm/issues/14351), fixed upstream only in pnpm ≥ 12.5.1).
+> Installing a second plugin that way **always** fails — use the `github:` shorthand or a local tarball path instead.
 
 ### From a local directory
 
