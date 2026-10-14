@@ -194,6 +194,15 @@ Organize skill compositions by series, and use the dropdown to pick which set th
 
 ---
 
+## 9. Official patches: this plugin needs none
+
+This plugin only occupies `system-prompt/assemble` and the skills service, so it **needs no official DSH patches** and shows no patch dialog — that notice belongs to the two plugins that do need patches (`dsh-context-reclaim`, `dsh-aux-degrade`).
+
+To see what the ten official patches do and whether you want them:
+
+- the tutorial "Install & official patches" → `tutorial-install-and-official-patches.md` (shipped inside this plugin);
+- the patch library → <https://github.com/xiamubumu/dsh-patch-library> (ten self-contained patches, an adaptive applier, five ways to apply them, ready-made prompts).
+
 ## Configuration
 
 ### State file

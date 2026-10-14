@@ -194,6 +194,15 @@ load_plugin({ ids: ["mcp:vnpy"] })
 
 ---
 
+## 9. 官方补丁：本插件不需要打
+
+本插件只占 `system-prompt/assemble` 与 skills 服务，**不需要给 DSH 打任何官方补丁**，所以它也不弹补丁窗 —— 补丁提示归需要补丁的那两个插件（`dsh-context-reclaim`、`dsh-aux-degrade`）。
+
+如果你想了解那 10 条官方补丁各自做什么、要不要打，见：
+
+- 教程《安装与官方补丁》→ `tutorial-install-and-official-patches.zh-CN.md`（本插件自带）；
+- 补丁库 → <https://github.com/xiamubumu/dsh-patch-library>（10 条自包含补丁 + 自适应应用器 + 五种打法 + 现成提示词）。
+
 ## 配置
 
 ### 状态文件
