@@ -4,6 +4,8 @@
 
 > ⚠️ **只支持 DSH 1.5**（`>=0.1.5-rc.2 <0.2.0`）。DSH 出新版本会跟进更新。
 
+> 🟢 **冲突概率极低。** 本插件只占 **1 个服务端接缝（`system-prompt/assemble`）** —— 实测只有 **4 个**插件与它共享;**2 个客户端槽位都是 `list` / `keyed` 型（可叠加、按 key 各占一格）**,不占任何 `chain` 型。详见下方[兼容性](#兼容性)。
+
 [English](README.md) · **简体中文**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

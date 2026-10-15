@@ -4,6 +4,8 @@
 
 > ⚠️ **DSH 1.5 only** (`>=0.1.5-rc.2 <0.2.0`). Newer DSH releases will be supported in follow-up updates.
 
+> 🟢 **Collision risk: very low.** It occupies **one server-side seam (`system-prompt/assemble`)** — only **4** plugins here share it — and its **two client slots are both `list` / `keyed`** (stackable, one cell per key), never `chain`. See [Compatibility](#compatibility).
+
 **English** · [简体中文](README.zh-CN.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
