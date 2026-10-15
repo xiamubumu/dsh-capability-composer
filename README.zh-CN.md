@@ -420,6 +420,33 @@ dsh plugin --profile web add /path/to/dsh-capability-composer
 
 ## 兼容性
 
+### 共存实测:会不会和别的插件打架(2026-10-15 实测)
+
+**服务端接缝 —— 不冲突。**
+
+本机 44 个已装插件里,有 **21 个**同样挂载 `llm/stream`、`tools/pre-execute`、`tools/post-execute`、`system-prompt/assemble`、`session/event` 中的至少一个,其中 **20 个是协作式的**(每个 handler 都调用 `next()` 往下传)。本插件与它们**同机共存**,包括像 `dsh-vision-router` 这种挂了 4 个相同接缝的。
+
+原因:DSH 的事件接缝是**中间件瀑布**,只要各方都调 `next()`、只做增量修改,就是**叠加**而不是抢占。
+
+**客户端槽位**:
+
+| 槽位 | 类型 | 说明 |
+|---|---|---|
+| `settings.plugins.tab` | `list` | 本插件自己的标签页 |
+| `tool.call.toolview` | `keyed` | 按 key 各占一格 |
+
+
+> 只有 **`chain` 型**槽位会「只渲染第一个」;`list` 可叠加,`keyed` 按 key 各占一格。**本插件不占任何 `chain` 型槽位。**
+
+**已知会撞的三种情况(如实)**
+
+1. 对方在**同一个服务端接缝**上做**整体重建**(把 system prompt / 工具结果整个重写),而不是增量修改;
+2. 对方占用**同一个 `chain` 型**槽位;
+3. 双方要求打**同一个官方文件**的补丁 —— 这一条会被补丁库的 `apply.mjs --check` **明确报 `conflict`**,不会静默出错。
+
+**已实测共存**:`dsh-context-reclaim` + `billion-context@0.1.175` 同机同 profile 无冲突 —— 前者走 **Cordis 事件总线**,后者走 **agent 引导层**(bootstrap-hook / native loader,自带 6 种 agent 的打包产物),两者**没有共享接缝**。
+
+
 | 项目 | 要求 |
 |---|---|
 | **DSH** | **1.5 系列**（`>=0.1.5-rc.2 <0.2.0`）。后续 DSH 版本会跟进更新 |
